@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3121137, g: 0.4954501, b: 0.79213727, a: 1}
+  m_IndirectSpecularColor: {r: 0.31257445, g: 0.49726486, b: 0.79343325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -72,7 +72,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
-    m_ReflectionCompression: 0
+    m_ReflectionCompression: 1
     m_MixedBakeMode: 0
     m_BakeBackend: 2
     m_PVRSampling: 1
@@ -15275,7 +15275,7 @@ LightingSettings:
   m_IndirectOutputScale: 2
   m_UsingShadowmask: 0
   m_BakeBackend: 2
-  m_LightmapMaxSize: 2048
+  m_LightmapMaxSize: 512
   m_BakeResolution: 70
   m_Padding: 2
   m_TextureCompression: 1
