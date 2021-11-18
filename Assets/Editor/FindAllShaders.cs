@@ -13,20 +13,39 @@ public class FindAllShaders
         var allgos = GetAllObjectsOnlyInScene();
         var sparkle = GOWithName(allgos, "WandSparkleGreen");
         HashSet<string> shaderNames = new HashSet<string>();
-        foreach (var gameObject in allgos)
+        var simpleLit = Shader.Find("Universal Render Pipeline/Simple Lit");
+        Debug.Log($"Is simple lit there {simpleLit != null}");
+
+        void ForeachSharedMaterial(Action<Material> materialAction)
         {
-            foreach (var renderer in sparkle.GetComponents<Renderer>())
+            foreach (var gameObject in allgos)
             {
-                foreach (var sharedMaterial in renderer.sharedMaterials)
+                foreach (var renderer in gameObject.GetComponents<Renderer>())
                 {
-                    shaderNames.Add(sharedMaterial.shader.name);
+                    foreach (var sharedMaterial in renderer.sharedMaterials)
+                    {
+                        materialAction.Invoke(sharedMaterial);
+                    }
                 }
             }
+            
         }
-        Debug.Log($"All shader names in scene: {String.Join(",",shaderNames)}");
+        ForeachSharedMaterial((material => shaderNames.Add(material?.shader?.name)));
+        Debug.Log($"All shader names in scene before: {String.Join(",",shaderNames)}");
+
+        ForeachSharedMaterial((material =>
+        {
+            if(material != null)
+                material.shader = simpleLit;
+        }));
+        
+        shaderNames.Clear();
+        ForeachSharedMaterial((material => shaderNames.Add(material?.shader?.name)));
+        Debug.Log($"All shader names in scene after: {String.Join(",",shaderNames)}");
+
 
         //Debug.Log($"Has WandSparkleGreen: {HasGOWithName(allgos,"WandSparkleGreen")}");
-        var simpleLit = Shader.Find("Universal Render Pipeline/Simple Lit");
+        
     }
     static GameObject GOWithName(IEnumerable<GameObject> gos,string name)
     {
