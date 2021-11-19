@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework.Internal;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,10 +40,6 @@ public class FindAllShaders
         shaderNames.Clear();
         ForeachSharedMaterial((material => shaderNames.Add(material?.shader?.name)));
         Debug.Log($"All shader names in scene after: {String.Join(",",shaderNames)}");
-
-
-        //Debug.Log($"Has WandSparkleGreen: {HasGOWithName(allgos,"WandSparkleGreen")}");
-        
     }
     static GameObject GOWithName(IEnumerable<GameObject> gos,string name)
     {
